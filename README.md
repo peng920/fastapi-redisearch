@@ -130,9 +130,20 @@ APP_VERSION=1.0.0
 DEBUG=True
 
 # Vector Search Configuration
-VECTOR_DIMENSION=384
+VECTOR_DIMENSION=1024
 DISTANCE_METRIC=COSINE
 MAX_RESULTS=10
+
+# Embedding Model Configuration
+# Options: sentence_transformers, tei
+EMBEDDING_PROVIDER=tei
+#EMBEDDING_MODEL_NAME=bge-m3
+
+FORCE_RECREATE_INDEX=False
+
+# TEI Configuration (OpenAI compatible)
+TEI_API_URL=http://localhost:8001/v1/embeddings
+# TEI_API_KEY=your_api_key_here
 ```
 
 ## API端点
@@ -157,8 +168,8 @@ MAX_RESULTS=10
 ## 注意事项
 
 1. 确保Redis版本支持RediSearch模块
-2. 首次运行时会自动下载预训练模型（约90MB）
-3. 向量维度根据嵌入模型自动确定（MiniLM-L6-v2: 384维）
+2. 如果使用本地embedding首次运行时会自动下载预训练模型（下载文件大小由所用模型决定）
+3. 向量维度根据嵌入模型自动确定（bge-m3: 1024维）
 4. 建议在生产环境中使用HTTPS和认证机制
 
 ## 许可证
